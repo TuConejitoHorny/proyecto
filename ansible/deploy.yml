@@ -1,0 +1,20 @@
+---
+- hosts: web
+  become: true
+
+  tasks:
+
+    - name: Start docker service
+      systemd:
+        name: docker
+        state: started
+
+    - name: Stop old containers
+      shell: docker compose down
+      args:
+        chdir: /home/admin/proyectos/devops-project
+
+    - name: Start containers
+      shell: docker compose up -d
+      args:
+        chdir: /home/admin/proyectos/devops-project
