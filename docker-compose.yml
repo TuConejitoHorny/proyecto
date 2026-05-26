@@ -1,0 +1,11 @@
+services:
+
+  nginx:
+    build: ./docker
+
+    container_name: nginx-devops
+
+    ports:
+      - "8080:80"
+
+    restart: always
