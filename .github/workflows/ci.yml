@@ -1,0 +1,47 @@
+name: DevOps CI
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  validate:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose
+        run: docker compose config
+
+      - name: Validate Dockerfile
+        run: docker build -t test-nginx ./docker
+
+      - name: Install Ansible
+        run: |
+          sudo apt update
+          sudo apt install -y ansible
+
+      - name: Validate Ansible Inventory
+        run: ansible-inventory -i ansible/inventory.ini --list
+
+      - name: Validate Ansible Playbook Syntax
+        run: ansible-playbook -i ansible/inventory.ini ansible/deploy.yml --syntax-check
+
+      - name: Validate Jenkinsfile
+        run: |
+          if [ -f Jenkinsfile ]; then
+            echo "Jenkinsfile exists"
+          else
+            echo "Jenkinsfile missing"
+            exit 1
+          fi
