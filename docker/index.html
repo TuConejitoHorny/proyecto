@@ -1,10 +1,229 @@
 <!DOCTYPE html>
-<html>
+html
+<!DOCTYPE html>
+<html lang="es">
+
 <head>
-    <title>DevOps Project</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevOps Automation Platform</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+
+            background:
+                linear-gradient(rgba(0,0,0,0.65),
+                rgba(0,0,0,0.75)),
+                url("https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            color: white;
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px;
+        }
+
+        .container {
+
+            width: 100%;
+            max-width: 1100px;
+
+            background: rgba(20, 20, 20, 0.75);
+
+            backdrop-filter: blur(8px);
+
+            border-radius: 20px;
+
+            padding: 60px;
+
+            box-shadow:
+                0 0 40px rgba(0,0,0,0.6);
+        }
+
+        h1 {
+
+            font-size: 4rem;
+            margin-bottom: 20px;
+
+            color: #4cc9f0;
+        }
+
+        h2 {
+
+            margin-top: 40px;
+            margin-bottom: 15px;
+
+            color: #f72585;
+        }
+
+        p {
+
+            line-height: 1.8;
+            color: #e5e5e5;
+        }
+
+        .cards {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(240px, 1fr));
+
+            gap: 25px;
+
+            margin-top: 40px;
+        }
+
+        .card {
+
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.1);
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+
+            transform: translateY(-5px);
+
+            background: rgba(255,255,255,0.12);
+        }
+
+        .card h3 {
+
+            margin-bottom: 15px;
+
+            color: #4cc9f0;
+        }
+
+        footer {
+
+            margin-top: 50px;
+
+            text-align: center;
+
+            opacity: 0.7;
+
+            font-size: 0.9rem;
+        }
+
+    </style>
+
 </head>
+
 <body>
-    <h1>Proyecto DevOps Automatizado</h1>
-    <p>Docker Compose + Jenkins + Ansible</p>
+
+    <div class="container">
+
+        <h1>DevOps Automation Platform</h1>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Vestibulum vulputate, sapien in facilisis sagittis,
+            lorem elit volutpat purus, non ultricies sem neque sed odio.
+            Integer aliquet magna vitae augue tincidunt, a feugiat
+            nunc convallis.
+        </p>
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Docker Compose</h3>
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Eaque molestiae fugit necessitatibus asperiores
+                    magni reprehenderit.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Jenkins CI/CD</h3>
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Consequuntur eligendi distinctio blanditiis
+                    similique pariatur.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Ansible Automation</h3>
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Doloremque deserunt exercitationem unde
+                    sapiente architecto.
+                </p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>GitHub Integration</h3>
+
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Dolore illo dignissimos minima illum
+                    rerum saepe.
+                </p>
+
+            </div>
+
+        </div>
+
+        <h2>Infrastructure Overview</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Sed cursus, augue non congue placerat, lectus turpis
+            porttitor lorem, vitae viverra magna velit quis sem.
+            Donec tincidunt velit nec magna scelerisque varius.
+        </p>
+
+        <h2>Continuous Deployment</h2>
+
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Laboriosam modi consequatur quisquam voluptatem,
+            sapiente dolore quaerat perferendis magni
+            cumque repellendus.
+        </p>
+
+        <footer>
+            DevOps Project — Fedora Server + Jenkins + Docker + Ansible
+        </footer>
+
+    </div>
+
 </body>
+
 </html>
