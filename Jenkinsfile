@@ -36,11 +36,13 @@ pipeline {
 
         stage('Run Ansible') {
             steps {
-                sh '''
+                sh """
                 ansible-playbook \
                 -i ansible/inventory.ini \
-                ansible/deploy.yml
-                '''
+                ansible/package-manager.yml \
+                -e "package_name=${PACKAGE_NAME}" \
+                -e "package_state=${PACKAGE_STATE}"
+                """
             }
         }
     }

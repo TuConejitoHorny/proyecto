@@ -1,0 +1,14 @@
+- name: Manage Fedora Client Packages
+  hosts: fedora_client
+  become: true
+
+  vars:
+    package_name: htop
+    package_state: present
+
+  tasks:
+
+    - name: Manage package
+      dnf:
+        name: "{{ package_name }}"
+        state: "{{ package_state }}"

@@ -1,0 +1,29 @@
+name: Package Manager
+
+on:
+
+  workflow_dispatch:
+
+    inputs:
+
+      package_name:
+        description: "Package name"
+        required: true
+        default: "htop"
+
+      package_state:
+        description: "present or absent"
+        required: true
+        default: "present"
+
+jobs:
+
+  trigger-jenkins:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Trigger Jenkins
+        run: |
+          curl -X POST "http://192.168.1.21:8080/job/devops-project/buildWithParameters?PACKAGE_NAME=${{ github.event.inputs.package_name }}&PACKAGE_STATE=${{ github.event.inputs.package_state }}"
