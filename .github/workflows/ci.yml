@@ -38,5 +38,13 @@ jobs:
 
       - name: Trigger Jenkins Pipeline
         run: |
+          STATE="present"
+
+          if [[ "${{ github.event.head_commit.message }}" =~ "absent" || "${{ github.event.head_commit.message }}" =~ "desinstalar" ]]; then
+            STATE="absent"
+          fi
+
+          echo "El estado enviado a Jenkins será: $STATE"
+
           CRUMB=$(curl -s "http://localhost:8080/crumbIssuer/api/json" --user "admin:${{ secrets.JENKINS_USER_TOKEN }}" | grep -o '"crumb":"[^"]*' | sed 's/"crumb":"//' | xargs -I {} echo "Jenkins-Crumb:{}")
-          curl -X POST -H "$CRUMB" "http://localhost:8080/job/devops-project/buildWithParameters?PACKAGE_NAME=htop&PACKAGE_STATE=present&token=${{ secrets.JENKINS_JOB_TOKEN }}" --user "admin:${{ secrets.JENKINS_USER_TOKEN }}" --data-urlencode "json={}"
+          curl -X POST -H "$CRUMB" "http://localhost:8080/job/devops-project/buildWithParameters?PACKAGE_NAME=htop&PACKAGE_STATE=${STATE}&token=${{ secrets.JENKINS_JOB_TOKEN }}" --user "admin:${{ secrets.JENKINS_USER_TOKEN }}" --data-urlencode "json={}"
