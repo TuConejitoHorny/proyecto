@@ -37,4 +37,6 @@ jobs:
         run: test -f Jenkinsfile
 
       - name: Trigger Jenkins Pipeline
-        run: curl -X POST "http://localhost:8080/job/devops-project/buildWithParameters?PACKAGE_NAME=htop&PACKAGE_STATE=present&token=${{ secrets.JENKINS_JOB_TOKEN }}" --user "admin:${{ secrets.JENKINS_USER_TOKEN }}" --data-urlencode "json={}"
+        run: |
+          CRUMB=$(curl -s "http://localhost:8080/crumbIssuer/api/json" --user "admin:${{ secrets.JENKINS_USER_TOKEN }}" | grep -o '"crumb":"[^"]*' | sed 's/"crumb":"//' | xargs -I {} echo "Jenkins-Crumb:{}")
+          curl -X POST -H "$CRUMB" "http://localhost:8080/job/devops-project/buildWithParameters?PACKAGE_NAME=htop&PACKAGE_STATE=present&token=${{ secrets.JENKINS_JOB_TOKEN }}" --user "admin:${{ secrets.JENKINS_USER_TOKEN }}" --data-urlencode "json={}"
