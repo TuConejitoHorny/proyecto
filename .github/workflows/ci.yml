@@ -35,5 +35,5 @@ jobs:
 
       - name: Validate Jenkinsfile
         run: test -f Jenkinsfile
-      - name: Trigger Jenkins Pipeline
-        run: curl -X POST "http://localhost:8080/job/devops-project/buildWithParameters?PACKAGE_NAME=htop&PACKAGE_STATE=present&token=${{ secrets.JENKINS_JOB_TOKEN }}" --user "admin:${{ secrets.JENKINS_USER_TOKEN }}"--data-urlencode json={}
+- name: Trigger Jenkins Pipeline
+        run: curl -X POST "http://192.168.1.21:8080/job/devops-project/buildWithParameters?PACKAGE_NAME=htop&PACKAGE_STATE=present&token=${{ secrets.JENKINS_JOB_TOKEN }}" --user "admin:${{ secrets.JENKINS_USER_TOKEN }}" --data-urlencode "json={}"
