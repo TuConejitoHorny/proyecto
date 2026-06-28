@@ -1,11 +1,29 @@
 services:
 
   nginx:
-    build: ./docker
+
+    build:
+      context: ./docker/nginx
 
     container_name: nginx-devops
 
     ports:
       - "8082:80"
 
-    restart: always
+    restart: unless-stopped
+
+  jellyfin:
+
+    image: jellyfin/jellyfin
+
+    container_name: jellyfin
+
+    ports:
+      - "8096:8096"
+
+    volumes:
+      - ./docker/jellyfin/config:/config
+      - ./docker/jellyfin/cache:/cache
+      - ./docker/jellyfin/media:/media
+
+    restart: unless-stopped

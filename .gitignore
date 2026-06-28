@@ -1,3 +1,9 @@
 *.retry
 *.log
 .env
+# Jellyfin
+docker/jellyfin/config/
+docker/jellyfin/cache/
+
+# Media
+docker/jellyfin/media/
