@@ -1,29 +1,33 @@
 name: Package Manager
 
 on:
-
   workflow_dispatch:
-
     inputs:
-
       package_name:
         description: "Package name"
         required: true
         default: "htop"
-
       package_state:
         description: "present or absent"
         required: true
         default: "present"
+        type: choice
+        options:
+          - present
+          - absent
 
 jobs:
-
   trigger-jenkins:
-
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
-
-      - name: Trigger Jenkins
+      - name: Trigger Jenkins Pipeline
         run: |
-          curl -X POST "http://192.168.1.21:8080/job/devops-project/buildWithParameters?PACKAGE_NAME=${{ github.event.inputs.package_name }}&PACKAGE_STATE=${{ github.event.inputs.package_state }}"
+          PK_NAME="${{ inputs.package_name }}"
+          PK_STATE="${{ inputs.package_state }}"
+
+          echo "Enviando a Jenkins -> Paquete: $PK_NAME | Estado: $PK_STATE"
+
+          CRUMB=$(curl -s "http://localhost:8080/crumbIssuer/api/json" --user "admin:${{ secrets.JENKINS_USER_TOKEN }}" | grep -o '"crumb":"[^"]*' | sed 's/"crumb":"//' | xargs -I {} echo "Jenkins-Crumb:{}")
+
+          curl -X POST -H "$CRUMB" "http://localhost:8080/job/devops-project/buildWithParameters?PACKAGE_NAME=${PK_NAME}&PACKAGE_STATE=${PK_STATE}&token=${{ secrets.JENKINS_JOB_TOKEN }}" --user "admin:${{ secrets.JENKINS_USER_TOKEN }}" --data-urlencode "json={}"
